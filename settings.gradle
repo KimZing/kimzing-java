@@ -1,0 +1,5 @@
+rootProject.name = 'kimzing-java'
+include 'code-generator'
+include 'practice-base'
+include 'program-news'
+include 'program-tetris'

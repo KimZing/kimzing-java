@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kimzing.news.repository.article.ArticleMapper">
+    <sql id="all_column">id,deleted,creator,modifier,create_time,modify_time,author_id,title,content,images,classify,mode,read_count</sql>
+    <sql id="po_column">author_id,title,content,images,classify,mode,read_count</sql>
+
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO `article`(<include refid="po_column"></include>)
+        VALUES(#{userId},#{title},#{content},#{images},#{classify},#{mode},#{readCount});
+    </insert>
+
+    <insert id="insertBatch">
+        INSERT INTO `article` (<include refid="po_column"></include>) VALUES
+        <foreach item="item" collection="list" separator=",">
+            (#{item.userId},#{item.title},#{item.content},#{item.images},#{item.classify},#{item.mode},#{item.readCount})
+        </foreach>
+    </insert>
+
+    <insert id="addArticleLike" parameterType="com.kimzing.news.domain.article.ArticleLikeDTO">
+        INSERT INTO `r_user_like_article`(id, user_id, article_id)
+        VALUES (null, #{userId}, #{articleId});
+    </insert>
+
+    <update id="update">
+        UPDATE `article`
+        <set>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="title != null">title = #{title},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="images != null">images = #{images},</if>
+            <if test="classify != null">classify = #{classify},</if>
+            <if test="mode != null">mode = #{mode},</if>
+            <if test="readCount != null">read_count = #{readCount},</if>
+        </set>
+        WHERE id = #{id} AND deleted = 0;
+    </update>
+
+    <delete id="removeArticleLike" parameterType="com.kimzing.news.domain.article.ArticleLikeDTO">
+        DELETE
+        FROM `r_user_like_article`
+        WHERE user_id = #{userId}
+          AND article_id = #{articleId};
+    </delete>
+
+    <delete id="delete">
+        UPDATE `article`
+        SET deleted = 1
+        WHERE id = #{id}
+    </delete>
+
+    <select id="selectById" resultType="com.kimzing.news.domain.article.ArticleBO">
+        SELECT a.id,a.deleted,a.creator,a.modifier,a.create_time,
+               a.modify_time,a.author_id,a.title,a.images,a.content,
+               a.classify,a.mode,a.read_count, ru.article_id > 0 as `isLike`
+        FROM `article` a
+        LEFT JOIN `r_user_like_article` ru ON a.id = ru.article_id and ru.user_id = #{userId}
+        WHERE
+              a.id = #{id} AND a.deleted = 0
+    </select>
+
+    <resultMap type="com.kimzing.news.domain.article.ArticleBO" id="articleBO">
+        <association column="author_id" property="author" javaType="com.kimzing.news.domain.user.UserBO"
+                     select="com.kimzing.news.repository.user.UserMapper.selectById">
+        </association>
+    </resultMap>
+
+    <select id="selectPage" resultMap="articleBO">
+        SELECT a.id,a.deleted,a.creator,a.modifier,a.create_time,
+        a.modify_time,a.author_id,a.title,a.images,
+        a.classify,a.mode,a.read_count, ru.article_id > 0 as `isLike`
+        FROM `article` a
+        LEFT JOIN `r_user_like_article` ru ON a.id = ru.article_id and ru.user_id = #{query.userId}
+        <where>
+            AND a.deleted = 0
+            <if test="query != null">
+                <if test="query.authorId != null">AND a.author_id = #{query.authorId}</if>
+                <if test="query.title != null">AND a.title = #{query.title}</if>
+                <if test="query.content != null">AND a.content = #{query.content}</if>
+                <if test="query.images != null">AND a.images = #{query.images}</if>
+                <if test="query.classify != null">AND a.classify like "%"#{query.classify}"%"</if>
+                <if test="query.mode != null">AND a.mode = #{query.mode}</if>
+                <if test="query.readCount != null">AND a.read_count = #{query.readCount}</if>
+            </if>
+        </where>
+    </select>
+
+    <select id="selectPageByKeyword" resultMap="articleBO">
+        SELECT a.*, ru.article_id > 0 as `isLike` FROM `article` a LEFT JOIN `r_user_like_article` ru ON a.id =
+        ru.article_id and ru.user_id = #{userId}
+        <where>
+            AND a.deleted = 0
+            AND ( a.title like "%"#{search}"%" OR a.content like "%"#{search}"%" OR a.classify like "%"#{search}"%")
+        </where>
+    </select>
+
+    <select id="selectArticleLike" resultType="com.kimzing.news.domain.article.ArticleLikeBO"
+            parameterType="com.kimzing.news.domain.article.ArticleLikeDTO">
+        SELECT id, article_id, user_id
+        FROM `r_user_like_article`
+        WHERE user_id = #{userId}
+          AND article_id = #{articleId}
+        LIMIT 1;
+    </select>
+
+    <select id="selectPageOfAllLike" resultMap="articleBO">
+        SELECT a.id,a.deleted,a.creator,a.modifier,a.create_time,a.modify_time,a.author_id,a.title,a.images,a.classify,a.mode,a.read_count, ru.article_id > 0 as `isLike` FROM `article` a RIGHT JOIN `r_user_like_article` ru ON a.id =
+        ru.article_id and ru.user_id = #{userId}
+        <where>
+            AND a.deleted = 0
+        </where>
+    </select>
+
+</mapper>
