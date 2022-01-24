@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
-import static java.awt.SystemColor.info;
-
 /**
  * 演示线程安全的CAS计数器和非线程安全的计数器.
  *
@@ -19,13 +17,13 @@ import static java.awt.SystemColor.info;
  * @since 2022/1/21 16:57
  */
 @Log
-public class CommonCounterAndCASCounter {
+public class 普通计数器和CAS计数器 {
 
     private int i = 0;
     private AtomicInteger atomicI = new AtomicInteger(0);
 
     public static void main(String[] args) {
-        CommonCounterAndCASCounter counter = new CommonCounterAndCASCounter();
+        普通计数器和CAS计数器 counter = new 普通计数器和CAS计数器();
         // 准备100个线程
         ArrayList<Thread> threads = new ArrayList<>();
         Stream.iterate(0, i -> i + 1)

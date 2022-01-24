@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
  * @since 2022/1/20 11:39
  */
 @Log
-public class CompareConcurrencyAndSerialCostTime {
+public class 对比并发和串行的执行效率 {
 
     /**
      * 执行次数

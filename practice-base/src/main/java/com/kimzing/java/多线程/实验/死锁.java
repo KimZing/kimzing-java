@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  * @since 2022/1/20 14:25
  */
 @Log
-public class DeadLock {
+public class 死锁 {
 
     private static String A = "A";
 
