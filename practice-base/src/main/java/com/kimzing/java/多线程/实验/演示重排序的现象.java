@@ -1,6 +1,7 @@
 package com.kimzing.java.多线程.实验;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 重排序.
@@ -58,7 +59,7 @@ public class 演示重排序的现象 {
             t1.join();
             t2.join();
 
-            System.out.println("i=" + i + "x = " + x + ", y = " + y);
+            System.out.println("i=" + i + ",x = " + x + ", y = " + y);
             if (x == 0 && y == 0) {
                 break;
             }
