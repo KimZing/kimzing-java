@@ -1,4 +1,4 @@
-package com.kimzing.java.多线程.实验;
+package com.kimzing.java.多线程.A实验;
 
 /**
  * 可见性.

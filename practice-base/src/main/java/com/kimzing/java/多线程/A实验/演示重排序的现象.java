@@ -1,7 +1,6 @@
-package com.kimzing.java.多线程.实验;
+package com.kimzing.java.多线程.A实验;
 
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
 /**
  * 重排序.
