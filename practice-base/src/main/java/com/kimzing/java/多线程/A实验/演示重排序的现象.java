@@ -11,7 +11,7 @@ import java.util.concurrent.CountDownLatch;
  * 线程2先执行，线程1后执行可能出现的值
  * x=0 y=1
  * x=1 y=1(相同)
- * 常规来说，会出现以上共三种状况
+ * 常规来说，线程按照顺序执行，线程可能会在任意位置切换。会出现以上共三种状况
  * <p>
  * 但是如果进行了重排序，则会出现x=0,y=0的结果。就是把y=b和x=a排序到了赋值的前面
  * </p>
@@ -59,7 +59,7 @@ public class 演示重排序的现象 {
             t2.join();
 
             System.out.println("i=" + i + ",x = " + x + ", y = " + y);
-            if (x == 0 && y == 0) {
+            if (x == 1 && y == 1) {
                 break;
             }
         }
