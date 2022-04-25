@@ -31,7 +31,7 @@ public class 线程中断interrupt_flag {
         // true
         System.out.println("thread2中断状态:" + thread2.isInterrupted());
         TimeUnit.SECONDS.sleep(2);
-        // false, 调用Thread.interrupted()会进行复位
+        // false  当不满足循环条件时线程执行结束，此时的interrupted也会变为false
         System.out.println("thread2成功中断后状态:" + thread2.isInterrupted());
 
         // 线程睡眠时被中断，会直接抛出异常终止，并恢复中断状态为false
