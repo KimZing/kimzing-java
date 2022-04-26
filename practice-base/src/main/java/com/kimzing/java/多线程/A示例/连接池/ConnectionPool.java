@@ -1,4 +1,4 @@
-package com.kimzing.java.多线程.A示例;
+package com.kimzing.java.多线程.A示例.连接池;
 
 import java.util.LinkedList;
 import java.util.concurrent.CountDownLatch;
@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author KimZing - kimzing@163.com
  * @since 2022/2/18 16:26
  */
-public class 数据库连接池 {
+public class ConnectionPool {
     /**
      * 存放连接的双向队列
      */
@@ -35,7 +35,7 @@ public class 数据库连接池 {
         CountDownLatch start = new CountDownLatch(1);
         // 主线程等待
         CountDownLatch end = new CountDownLatch(threadCount);
-        数据库连接池 pools = new 数据库连接池(10);
+        ConnectionPool pools = new ConnectionPool(10);
         for (int i = 0; i < threadCount; i++) {
             Thread thread = new Thread(new Client(pools, count, gotNum, notGotNum, start, end), "client-" + (i + 1));
             thread.start();
@@ -47,7 +47,7 @@ public class 数据库连接池 {
         System.out.println(String.format("总次数:%d,获取连接数:%d,未获取连接数:%d", threadCount * count, gotNum.get(), notGotNum.get()));
     }
 
-    public 数据库连接池(int initialSize) {
+    public ConnectionPool(int initialSize) {
         // 设置默认的初始化连接数量
         if (initialSize <= 0) {
             initialSize = 5;
@@ -135,14 +135,14 @@ public class 数据库连接池 {
 
     static class Client implements Runnable {
 
-        private 数据库连接池 pools;
+        private ConnectionPool pools;
         private int count;
         private AtomicInteger gotNum;
         private AtomicInteger notGotNum;
         private CountDownLatch start;
         private CountDownLatch end;
 
-        public Client(数据库连接池 pools, int count, AtomicInteger gotNum, AtomicInteger notGotNum, CountDownLatch start, CountDownLatch end) {
+        public Client(ConnectionPool pools, int count, AtomicInteger gotNum, AtomicInteger notGotNum, CountDownLatch start, CountDownLatch end) {
             this.pools = pools;
             this.count = count;
             this.gotNum = gotNum;
