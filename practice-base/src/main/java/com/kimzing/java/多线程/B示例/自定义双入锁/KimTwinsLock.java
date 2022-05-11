@@ -1,4 +1,4 @@
-package com.kimzing.java.多线程.A示例.自定义双入锁;
+package com.kimzing.java.多线程.B示例.自定义双入锁;
 
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 

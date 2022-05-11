@@ -1,4 +1,4 @@
-package com.kimzing.java.多线程.B单例;
+package com.kimzing.java.多线程.B示例.单例;
 
 /**
  * 基于双重检查锁定和volatile实现.

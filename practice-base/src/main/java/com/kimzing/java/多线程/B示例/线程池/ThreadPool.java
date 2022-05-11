@@ -1,4 +1,4 @@
-package com.kimzing.java.多线程.A示例.线程池;
+package com.kimzing.java.多线程.B示例.线程池;
 
 /**
  * 线程池.

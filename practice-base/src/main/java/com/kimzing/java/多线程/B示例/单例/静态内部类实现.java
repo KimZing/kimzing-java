@@ -1,4 +1,4 @@
-package com.kimzing.java.多线程.B单例;
+package com.kimzing.java.多线程.B示例.单例;
 
 /**
  * 静态内部类.

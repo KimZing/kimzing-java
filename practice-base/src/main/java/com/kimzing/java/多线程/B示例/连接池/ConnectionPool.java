@@ -1,4 +1,4 @@
-package com.kimzing.java.多线程.A示例.连接池;
+package com.kimzing.java.多线程.B示例.连接池;
 
 import java.util.LinkedList;
 import java.util.concurrent.CountDownLatch;

@@ -1,4 +1,4 @@
-package com.kimzing.java.多线程.A示例.自定义互斥锁;
+package com.kimzing.java.多线程.B示例.自定义互斥锁;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
