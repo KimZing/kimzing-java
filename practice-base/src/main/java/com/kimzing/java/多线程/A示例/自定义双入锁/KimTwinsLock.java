@@ -29,7 +29,7 @@ public class KimTwinsLock {
             if (count <= 0) {
                 throw new IllegalArgumentException();
             }
-            setState(2);
+            setState(count);
         }
 
         /**
@@ -59,6 +59,7 @@ public class KimTwinsLock {
             for (;;) {
                 int expect = getState();
                 int update = expect + args;
+                // 此时可能存在多个线程同时释放，所以需要安全的设置State的值
                 if (compareAndSetState(expect, update)) {
                     return true;
                 }

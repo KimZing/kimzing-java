@@ -88,6 +88,7 @@ public class KimMutex {
             if (getState() == 0) {
                 throw new  IllegalMonitorStateException();
             }
+            // 有获取锁的线程来执行，不需要考虑线程安全问题
             setState(0);
             setExclusiveOwnerThread(null);
             return true;
