@@ -17,6 +17,9 @@ public class ForkJoinPoolFibonacciDemo {
         Fibonacci fibonacciTask = new Fibonacci(20);
         ForkJoinPool forkJoinPool = new ForkJoinPool();
         ForkJoinTask<Integer> result = forkJoinPool.submit(fibonacciTask);
+        if (fibonacciTask.isCompletedAbnormally()) {
+            System.out.println(fibonacciTask.getException());
+        }
         System.out.println(result.get());
 
     }
