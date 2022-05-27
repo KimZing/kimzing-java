@@ -1,4 +1,4 @@
-package com.kimzing.java.多线程.B示例.Condition;
+package com.kimzing.java.多线程.B示例.队列.阻塞.数组;
 
 /**
  * 有界队列测试.
@@ -6,16 +6,16 @@ package com.kimzing.java.多线程.B示例.Condition;
  * @author KimZing - kimzing@163.com
  * @since 2022/5/25 17:22
  */
-public class BoundedQueueTest {
+public class ArrayBlockBoundedQueueTest {
 
 
     public static void main(String[] args) {
-        BoundedQueue<Integer> boundedQueue = new BoundedQueue(10);
+        ArrayBlockBoundedQueue<Integer> arrayBlockBoundedQueue = new ArrayBlockBoundedQueue(10);
         // 分别创建十个添加和删除线程
         for (int i = 0; i < 10; i++) {
             new Thread(() -> {
                 try {
-                    boundedQueue.put(12);
+                    arrayBlockBoundedQueue.put(12);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -23,7 +23,7 @@ public class BoundedQueueTest {
 
             new Thread(() -> {
                 try {
-                    Object remove = boundedQueue.take();
+                    Object remove = arrayBlockBoundedQueue.take();
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

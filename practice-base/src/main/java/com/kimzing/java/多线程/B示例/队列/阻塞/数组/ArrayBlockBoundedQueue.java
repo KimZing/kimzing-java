@@ -1,9 +1,11 @@
-package com.kimzing.java.多线程.B示例.Condition;
+package com.kimzing.java.多线程.B示例.队列.阻塞.数组;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
+ * 自己实现有界阻塞队列
+ *
  * 用condition实现有界阻塞队列.
  * <p>
  *  1. 当队列为空时，队列的获取操作将会阻塞获取线程
@@ -23,7 +25,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author KimZing - kimzing@163.com
  * @since 2022/5/25 14:35
  */
-public class BoundedQueue<T> {
+public class ArrayBlockBoundedQueue<T> {
 
     private Object[] items;
     private int count, putIndex, takeIndex;
@@ -31,7 +33,7 @@ public class BoundedQueue<T> {
     private Condition notFull = lock.newCondition();
     private Condition notEmpty = lock.newCondition();
 
-    public BoundedQueue(int capacity){
+    public ArrayBlockBoundedQueue(int capacity){
         items = new Object[capacity];
     }
 
