@@ -14,13 +14,15 @@ import java.util.concurrent.RecursiveTask;
 public class ForkJoinPoolFibonacciDemo {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        Fibonacci fibonacciTask = new Fibonacci(20);
-        ForkJoinPool forkJoinPool = new ForkJoinPool();
+        Fibonacci fibonacciTask = new Fibonacci(25);
+        ForkJoinPool forkJoinPool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
+        long start = System.currentTimeMillis();
         ForkJoinTask<Integer> result = forkJoinPool.submit(fibonacciTask);
         if (fibonacciTask.isCompletedAbnormally()) {
             System.out.println(fibonacciTask.getException());
         }
         System.out.println(result.get());
+        System.out.println("共耗时：" + (System.currentTimeMillis() - start));
 
     }
 
@@ -38,9 +40,12 @@ class Fibonacci extends RecursiveTask<Integer> {
         if (n <= 1) {
             System.out.println("计算中");
             return n;
-        } ;
+        }
+        ;
         Fibonacci f1 = new Fibonacci(n - 1);
         Fibonacci f2 = new Fibonacci(n - 2);
+        // 用两次fork()在join的时候，需要用这样的顺序：a.fork(); b.fork(); b.join(); a.join();这个要求在JDK官方文档里有说明。
+        // 也可以使用f1.join + f2.compute(), f2.fork就不需要了
         f1.fork();
         f2.fork();
         System.out.println(Thread.currentThread().getName() + "拆分中");
