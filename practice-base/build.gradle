@@ -12,6 +12,7 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.openjdk.jol:jol-core:0.16'
     compileOnly 'org.projectlombok:lombok:1.18.10'
     annotationProcessor 'org.projectlombok:lombok:1.18.10'
 }
