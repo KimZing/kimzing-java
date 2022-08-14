@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.FileOutConfig;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
-import com.kimzing.utils.string.StringUtil;
+import com.kimzing.generator.utils.string.StringUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -12,13 +12,13 @@ dependencies {
     implementation 'com.baomidou:mybatis-plus-generator:3.3.2'
     // mysql连接驱动
     runtimeOnly 'mysql:mysql-connector-java:5.1.48'
-    // 工具项目
-    implementation 'com.kimzing:kimzing-utils:1.0.0-SNAPSHOT'
+    implementation 'org.apache.commons:commons-lang3:3.10'
+    // JSON注解
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.11.1'
 }
 
 repositories {
     maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
-    maven { url 'http://mvn.kimzing.com/repository/maven-public/' }
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     mavenCentral()
 }

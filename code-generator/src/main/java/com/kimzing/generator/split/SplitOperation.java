@@ -1,6 +1,7 @@
 package com.kimzing.generator.split;
 
-import com.kimzing.utils.file.FileUtil;
+
+import com.kimzing.generator.utils.file.FileUtil;
 
 import java.io.File;
 import java.io.IOException;

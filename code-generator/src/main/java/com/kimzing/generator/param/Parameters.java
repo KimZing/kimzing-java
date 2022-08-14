@@ -1,8 +1,8 @@
 package com.kimzing.generator.param;
 
 import com.kimzing.generator.generator.CodeGenerator;
-import com.kimzing.utils.property.PropertiesUtil;
-import com.kimzing.utils.string.StringUtil;
+import com.kimzing.generator.utils.property.PropertiesUtil;
+import com.kimzing.generator.utils.string.StringUtil;
 
 import java.io.File;
 import java.util.Map;

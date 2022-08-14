@@ -2,7 +2,7 @@ package com.kimzing.generator.config;
 
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
-import com.kimzing.utils.po.AbstractPO;
+import com.kimzing.generator.utils.po.AbstractPO;
 
 import static com.kimzing.generator.param.Parameters.superEntityColumns;
 import static com.kimzing.generator.param.Parameters.table;
