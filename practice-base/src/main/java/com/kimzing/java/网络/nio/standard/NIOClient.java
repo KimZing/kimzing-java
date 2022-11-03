@@ -28,7 +28,7 @@ public class NIOClient {
         client.write(ByteBuffer.wrap("hello nio".getBytes()));
         // 读取数据
         while (true) {
-            byte[] bytes = new byte[1];
+            byte[] bytes = new byte[1024];
             int read = client.read(ByteBuffer.wrap(bytes));
             if (read != 0) {
                 System.out.println("服务器返回:" + new String(bytes));
