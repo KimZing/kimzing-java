@@ -1,21 +1,19 @@
-package com.kimzing.java.网络.reactor.single;
+package com.kimzing.java.网络.reactor.mainslave;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
-import java.nio.charset.StandardCharsets;
 
 /**
  * .
  *
  * @author KimZing - kimzing@163.com
- * @since 2022/11/3 11:09
+ * @since 2022/11/3 18:24
  */
-public class SingleHandler implements Runnable {
+public class MainSlaveHandler implements Runnable {
+    private final SocketChannel socketChannel;
 
-    private SocketChannel socketChannel;
-
-    public SingleHandler(SocketChannel socketChannel) {
+    public MainSlaveHandler(SocketChannel socketChannel) {
         this.socketChannel = socketChannel;
     }
 
@@ -29,8 +27,7 @@ public class SingleHandler implements Runnable {
                 socketChannel.close();
                 return;
             }
-            System.out.println("收到客户端数据：" + new String(byteBuffer.array(), StandardCharsets.UTF_8));
-            socketChannel.write(ByteBuffer.wrap("ok".getBytes(StandardCharsets.UTF_8)));
+            System.out.println("收到客户端消息:" + new String(byteBuffer.array()));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -6,6 +6,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -33,18 +34,27 @@ public class NIOServer {
                 System.out.println("客户端建立连接");
             }
 
-            clients.forEach(c -> {
+            Iterator<SocketChannel> iterator = clients.iterator();
+            while (iterator.hasNext()) {
+                SocketChannel next = iterator.next();
                 ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
                 try {
-                    int read = c.read(byteBuffer);
+                    int read = next.read(byteBuffer);
+                    if (read == -1) {
+                        System.out.println("连接已经关闭");
+                        next.close();
+                        iterator.remove();
+                        return;
+                    }
                     if (read > 0) {
                         System.out.println("接收到客户端消息" + new String(byteBuffer.array()));
-                        c.write(ByteBuffer.wrap("ok\n".getBytes()));
+                        next.write(ByteBuffer.wrap("ok\n".getBytes()));
                     }
+
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-            });
+            }
         }
     }
 

@@ -50,8 +50,9 @@ public class MultiHandler implements Runnable {
                 int read = socketChannel.read(byteBuffer);
                 // 如果通道关闭了，会不停触发read事件，且这里返回-1，就是通道关闭的意思
                 if (read == -1) {
-                    System.out.println("已经关闭");
+                    System.out.println("通道已经关闭");
                     socketChannel.close();
+                    return;
                 }
                 System.out.println(Thread.currentThread().getName() + "-接收到客户端请求:" + new String(byteBuffer.array()));
                 socketChannel.write(ByteBuffer.wrap("ok".getBytes()));

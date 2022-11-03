@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 阻塞IO服务端.
  * <p>
- *     多线程版本，支持同时进行多个连接的读写操作
+ * 多线程版本，支持同时进行多个连接的读写操作
  * </p>
  *
  * @author KimZing - kimzing@163.com
@@ -24,14 +24,14 @@ public class BIOServer {
     public static void main(String[] args) throws IOException, InterruptedException {
         ServerSocket serverSocket = new ServerSocket(8080);
         while (true) {
-// 阻塞
+            // 阻塞
             Socket instance = serverSocket.accept();
             executor.execute(() -> {
                 try {
                     BufferedReader bufferedReader =
                             new BufferedReader(new InputStreamReader(instance.getInputStream()));
-                // 阻塞
-                String request = null;
+                    // 阻塞
+                    String request = null;
                     request = bufferedReader.readLine();
                     System.out.println("收到客户端请求:" + request);
                     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(instance.getOutputStream()));

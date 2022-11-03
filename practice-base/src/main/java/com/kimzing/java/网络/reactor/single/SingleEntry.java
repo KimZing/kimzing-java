@@ -8,7 +8,7 @@ import java.io.IOException;
  * @author KimZing - kimzing@163.com
  * @since 2022/11/3 10:42
  */
-public class SingleMain {
+public class SingleEntry {
 
     public static void main(String[] args) throws IOException {
         new Thread(new SingleReactor()).start();
