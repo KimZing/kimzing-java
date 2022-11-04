@@ -26,6 +26,7 @@ public class MainSlaveSubReactor implements Runnable{
         while(true){
             try {
                 selector.select();
+                // 这里要睡眠一下，否则在Acceptor中刚唤醒又进入了下一轮的select()阻塞，read事件注册不上
                 Thread.sleep(1000);
                 Set<SelectionKey> selectionKeys = selector.selectedKeys();
                 Iterator<SelectionKey> iterator = selectionKeys.iterator();

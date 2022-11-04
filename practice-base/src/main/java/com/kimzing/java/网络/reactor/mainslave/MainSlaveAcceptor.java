@@ -49,7 +49,7 @@ public class MainSlaveAcceptor implements Runnable {
             socketChannel.configureBlocking(false);
 
             // MARK 这里感觉也比较奇葩，唤醒该线程，但如果执行的足够快，那么会直接进入下一次的阻塞，导致下面的事件注册还是注册不了，
-            // 在select()阻塞方法的下面睡眠一会就一切正常了
+            // 在select()阻塞方法的下面睡眠一会就一切正常了，netty当中使用了队列来达到一样的效果
             selectors[index].wakeup();
 
             System.out.println("开始注册读事件-" + index);
