@@ -45,15 +45,16 @@ public class NettyClient {
 }
 
 class ClientHandler extends ChannelInboundHandlerAdapter {
+
+    String message = "一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;一二三四五六七八九十;";
+
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         System.out.println("客户端连接成功");
+        ByteBuf byteBuf = ByteBufAllocator.DEFAULT.directBuffer();
 
-        for (int i = 0; i < 10; i++) {
-            ByteBuf byteBuf = ByteBufAllocator.DEFAULT.directBuffer();
-            byteBuf.writeBytes(("第" + i + "条消息-").getBytes(StandardCharsets.UTF_8));
-            ctx.writeAndFlush(byteBuf);
-        }
+        byteBuf.writeBytes(message.getBytes(StandardCharsets.UTF_8));
+        ctx.writeAndFlush(byteBuf);
         super.channelActive(ctx);
     }
 
@@ -63,6 +64,6 @@ class ClientHandler extends ChannelInboundHandlerAdapter {
         int i = message.readableBytes();
         byte[] bytes = new byte[i];
         message.readBytes(bytes);
-        System.out.println("服务端消息:" + new String(bytes, StandardCharsets.UTF_8));
+        System.out.println("收到服务端消息:" + new String(bytes, StandardCharsets.UTF_8));
     }
 }
