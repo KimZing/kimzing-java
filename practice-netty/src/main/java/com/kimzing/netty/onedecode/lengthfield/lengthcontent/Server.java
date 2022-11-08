@@ -1,4 +1,4 @@
-package com.kimzing.netty.onedecode.lengthfield.typetotallengthcontent;
+package com.kimzing.netty.onedecode.lengthfield.lengthcontent;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
@@ -18,7 +18,7 @@ import java.nio.charset.StandardCharsets;
  * @author KimZing - kimzing@163.com
  * @since 2022/11/7 13:39
  */
-public class TypeTotalLengthContentServer {
+public class Server {
 
     public static void main(String[] args) {
         ServerBootstrap serverBootstrap = new ServerBootstrap();
@@ -29,9 +29,9 @@ public class TypeTotalLengthContentServer {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
                         ch.pipeline()
-                                // 解析长度并提取内容 (大端序，长度为最大值，第2位才是长度信息,长度共4个字节，补偿值为-4，跳过5个长度信息， 快速失败)
+                                // 解析长度并提取内容 (大端序，长度为最大值，第一位就是长度信息,长度共4个字节，补偿值为0，跳过4个长度信息， 快速失败)
                                 .addLast(new LengthFieldBasedFrameDecoder(ByteOrder.BIG_ENDIAN, Integer.MAX_VALUE,
-                                        1, 4, 0, 5, false))
+                                        0, 4, 0, 4, false))
                                 .addLast(new SimpleServerHandler());
                     }
                 });

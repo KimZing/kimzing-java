@@ -18,7 +18,7 @@ import java.nio.charset.StandardCharsets;
  * @author KimZing - kimzing@163.com
  * @since 2022/11/7 13:39
  */
-public class TotalLengthContentServer {
+public class Server {
 
     public static void main(String[] args) {
         ServerBootstrap serverBootstrap = new ServerBootstrap();
