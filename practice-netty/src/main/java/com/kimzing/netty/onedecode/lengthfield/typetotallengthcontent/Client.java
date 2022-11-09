@@ -3,14 +3,10 @@ package com.kimzing.netty.onedecode.lengthfield.typetotallengthcontent;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.channel.ChannelInitializer;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.LengthFieldPrepender;
-import io.netty.handler.codec.MessageToByteEncoder;
 
 import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
@@ -30,7 +26,7 @@ public class Client {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
                         ch.pipeline()
-                                // 在前面模拟一个type单字节，其他功能一样
+                                // 在前面添加一个type单字节
                                 .addLast(new MessageTypeHandler())
                                 // 给内容追加长度信息，(大端序，长度四个字节，补偿值0， 长度信息中包含长度自身的长度)
                                 .addLast(new LengthFieldPrepender(ByteOrder.BIG_ENDIAN, 4, 0, false))
@@ -58,22 +54,24 @@ public class Client {
         }
     }
 
-    private static class MessageTypeHandler extends MessageToByteEncoder<ByteBuf> {
+    private static class MessageTypeHandler extends ChannelOutboundHandlerAdapter {
 
         @Override
-        protected void encode(ChannelHandlerContext ctx, ByteBuf msg, ByteBuf out) throws Exception {
-            int length = msg.readableBytes();
-            byte[] bytes = new byte[length];
-            msg.readBytes(bytes);
+        public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
+            ByteBuf byteBuf = (ByteBuf) msg;
+
             // 由于前面的处理器加入了长度信息，会发送两次消息过来。
             // 一个是长度，一个是实际的数据, 这里就写死长度固定为4
-            if (length == 4) {
-                out.writeByte('a');
-                out.writeBytes(bytes);
+            if (byteBuf.readableBytes() == 4) {
+                ByteBuf out = ByteBufAllocator.DEFAULT.directBuffer();
+                out.writeByte('M');
+                out.writeBytes(byteBuf);
+                ctx.write(out, promise);
             } else {
                 // 非长度数据直接返回
-                out.writeBytes(bytes);
+                ctx.write(byteBuf, promise);
             }
         }
+
     }
 }
