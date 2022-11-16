@@ -1,5 +1,6 @@
 package com.kimzing.java;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -13,7 +14,19 @@ import java.util.stream.Stream;
 public class Temp {
 
     public static void main(String[] args) {
-        printarab();
+        // printarab();
+        removeListError();
+    }
+
+    private static void removeListError() {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("a");
+        list.add("b");
+        list.add("c");
+        list.add("d");
+        for (String s : list) {
+            list.remove(s);
+        }
     }
 
     private static void printarab() {
