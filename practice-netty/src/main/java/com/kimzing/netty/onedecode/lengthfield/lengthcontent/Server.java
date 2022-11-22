@@ -29,9 +29,9 @@ public class Server {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
                         ch.pipeline()
-                                // 解析长度并提取内容 (大端序，长度为最大值，第一位就是长度信息,长度共4个字节，补偿值为0，跳过4个长度信息， 快速失败)
+                                // 解析长度并提取内容 (大端序，长度为最大值，第一位就是长度信息,长度共4个字节，因长度中包含长度自身长度补偿值为-4，跳过4个长度信息， 快速失败)
                                 .addLast(new LengthFieldBasedFrameDecoder(ByteOrder.BIG_ENDIAN, Integer.MAX_VALUE,
-                                        0, 4, 0, 4, false))
+                                        0, 4, -4, 4, false))
                                 .addLast(new SimpleServerHandler());
                     }
                 });

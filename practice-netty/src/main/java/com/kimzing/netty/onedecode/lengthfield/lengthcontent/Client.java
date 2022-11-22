@@ -29,7 +29,7 @@ public class Client {
                     protected void initChannel(NioSocketChannel ch) throws Exception {
                         ch.pipeline()
                                 // 给内容追加长度信息，(大端序，长度四个字节，补偿值0， 长度信息中包含长度自身的长度)
-                                .addLast(new LengthFieldPrepender(ByteOrder.BIG_ENDIAN, 4, 0, false))
+                                .addLast(new LengthFieldPrepender(ByteOrder.BIG_ENDIAN, 4, 0, true))
                                 .addLast(new SimpleClientHandler());
                     }
                 });
