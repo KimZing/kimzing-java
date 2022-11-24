@@ -16,5 +16,6 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         KimMessage message = (KimMessage) msg;
         System.out.println("接收到客户端对象:" + message.toString());
+
     }
 }
