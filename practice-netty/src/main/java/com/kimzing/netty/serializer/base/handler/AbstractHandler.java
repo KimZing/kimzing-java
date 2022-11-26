@@ -43,7 +43,7 @@ public abstract class AbstractHandler extends ChannelInboundHandlerAdapter {
      * */
     private void handlePING(ChannelHandlerContext ctx) {
         System.out.println("收到PING消息:" + ctx.channel().remoteAddress());
-        Header header = new Header(1, null, null, ReqTypeEnum.PONG);
+        Header header = new Header(1, null, ReqTypeEnum.PONG);
         KimMessage PONG = new KimMessage(header, null);
         ctx.writeAndFlush(PONG);
     }

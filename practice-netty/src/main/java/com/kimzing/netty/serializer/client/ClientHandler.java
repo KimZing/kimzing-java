@@ -5,7 +5,7 @@ import com.kimzing.netty.serializer.base.entity.KimMessage;
 import com.kimzing.netty.serializer.base.entity.User;
 import com.kimzing.netty.serializer.base.enums.LanguageEnum;
 import com.kimzing.netty.serializer.base.enums.ReqTypeEnum;
-import com.kimzing.netty.serializer.base.enums.SerializableEnum;
+import com.kimzing.netty.serializer.base.enums.SerializerTypeEnum;
 import com.kimzing.netty.serializer.base.handler.AbstractHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.timeout.IdleState;
@@ -19,6 +19,7 @@ import io.netty.handler.timeout.IdleStateEvent;
  */
 public class ClientHandler extends AbstractHandler {
 
+    private SerializerTypeEnum type = SerializerTypeEnum.JAVA;
 
     private final NettyClient nettyClient;
 
@@ -42,7 +43,7 @@ public class ClientHandler extends AbstractHandler {
     }
 
     private KimMessage createRequest() {
-        Header header = new Header(1, LanguageEnum.JAVA, SerializableEnum.OBJECT, ReqTypeEnum.MESSAGE);
+        Header header = new Header(1, LanguageEnum.JAVA, ReqTypeEnum.MESSAGE);
         User user = new User("kimzing", "kimzing@163.com", "boy");
         return new KimMessage(header, user);
     }
@@ -68,7 +69,7 @@ public class ClientHandler extends AbstractHandler {
 
     protected void handleWriterIdle(ChannelHandlerContext ctx) {
         System.out.println("发送PING报文");
-        Header header = new Header(1, null, null, ReqTypeEnum.PING);
+        Header header = new Header(1, null, ReqTypeEnum.PING);
         KimMessage PING = new KimMessage(header, null);
         ctx.writeAndFlush(PING);
     }
