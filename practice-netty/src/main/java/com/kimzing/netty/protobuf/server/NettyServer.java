@@ -1,6 +1,6 @@
 package com.kimzing.netty.protobuf.server;
 
-import com.kimzing.netty.protobuf.entity.Messages;
+import com.kimzing.netty.protobuf.entity.MessageProto;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -33,7 +33,7 @@ public class NettyServer {
                     protected void initChannel(SocketChannel ch) throws Exception {
                         ch.pipeline()
                                 .addLast(new ProtobufVarint32FrameDecoder())
-                                .addLast(new ProtobufDecoder(Messages.Message.getDefaultInstance()))
+                                .addLast(new ProtobufDecoder(MessageProto.Message.getDefaultInstance()))
                                 .addLast(new ServerHandler());
                     }
                 });

@@ -1,7 +1,6 @@
 package com.kimzing.netty.protobuf.server;
 
-import com.kimzing.netty.custom.base.entity.KimMessage;
-import com.kimzing.netty.protobuf.entity.Messages;
+import com.kimzing.netty.protobuf.entity.MessageProto;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -15,7 +14,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        Messages.Message message = (Messages.Message) msg;
+        MessageProto.Message message = (MessageProto.Message) msg;
         System.out.println("接收到客户端对象:" + message.toString());
 
     }
