@@ -48,5 +48,5 @@ protobuf {
         }
     }
     // 生成的类文件的位置 $buildDir:构建目录  $projectDir:项目目录
-    generatedFilesBaseDir = "$buildDir/proto/src"
+    generatedFilesBaseDir = "$projectDir/src/generated"
 }
