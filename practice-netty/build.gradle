@@ -48,6 +48,5 @@ protobuf {
         }
     }
     // 生成的类文件的位置 $buildDir:构建目录  $projectDir:项目目录
-    // 这里直接配置到项目的目录下，直接进行了合并
-    generatedFilesBaseDir = "$projectDir/src"
+    generatedFilesBaseDir = "$buildDir/proto/src"
 }
