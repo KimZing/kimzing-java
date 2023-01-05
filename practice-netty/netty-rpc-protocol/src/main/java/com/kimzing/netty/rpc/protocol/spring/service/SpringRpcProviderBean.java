@@ -1,6 +1,6 @@
 package com.kimzing.netty.rpc.protocol.spring.service;
 
-import com.kimzing.netty.rpc.protocol.annotation.GpRemoteService;
+import com.kimzing.netty.rpc.protocol.annotation.KimService;
 import com.kimzing.netty.rpc.protocol.netty.NettyServer;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
@@ -21,7 +21,7 @@ public class SpringRpcProviderBean implements BeanPostProcessor, InitializingBea
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         // 只要是加了GpRemoteService注解的，都需要发发布到map中，跟spring容器对象隔离
-        if(bean.getClass().isAnnotationPresent(GpRemoteService.class)){
+        if(bean.getClass().isAnnotationPresent(KimService.class)){
             Method[] methods = bean.getClass().getDeclaredMethods();
 
             for(Method method:methods){

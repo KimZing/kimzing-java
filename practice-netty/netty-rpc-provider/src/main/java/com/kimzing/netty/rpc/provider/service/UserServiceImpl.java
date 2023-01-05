@@ -1,13 +1,14 @@
 package com.kimzing.netty.rpc.provider.service;
 
-import com.kimzing.netty.rpc.api.user.IUserService;
-import com.kimzing.netty.rpc.protocol.annotation.GpRemoteService;
+import com.kimzing.netty.rpc.api.user.User;
+import com.kimzing.netty.rpc.api.user.UserService;
+import com.kimzing.netty.rpc.protocol.annotation.KimService;
 
-@GpRemoteService
-public class UserServiceImpl implements IUserService {
+@KimService
+public class UserServiceImpl implements UserService {
 
     @Override
-    public String saveUser(String name) {
-        return name;
+    public String save(User user) {
+        return "保存成功:" + user.getName();
     }
 }

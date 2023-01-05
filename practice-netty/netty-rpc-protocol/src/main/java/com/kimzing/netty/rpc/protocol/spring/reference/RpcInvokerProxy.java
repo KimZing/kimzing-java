@@ -32,8 +32,8 @@ public class RpcInvokerProxy implements InvocationHandler {
         RpcRequest rpcRequest = new RpcRequest();
         rpcRequest.setClassName(method.getDeclaringClass().getName());
         rpcRequest.setMethodName(method.getName());
-        rpcRequest.setParams(args);
         rpcRequest.setParameterTypes(method.getParameterTypes());
+        rpcRequest.setParams(args);
         rpcProtocal.setContent(rpcRequest);
 
         // 发送数据到服务端

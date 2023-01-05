@@ -10,6 +10,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Autowired
-public @interface GpRemoteReference {
+public @interface KimReference {
 
 }
