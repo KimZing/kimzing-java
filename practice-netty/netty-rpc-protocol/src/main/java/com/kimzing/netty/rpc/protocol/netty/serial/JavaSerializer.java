@@ -1,6 +1,4 @@
-package com.kimzing.netty.rpc.protocol.serial;
-
-import com.kimzing.netty.rpc.protocol.core.SerialType;
+package com.kimzing.netty.rpc.protocol.netty.serial;
 
 import java.io.*;
 
@@ -33,8 +31,4 @@ public class JavaSerializer  implements ISerializer{
         return null;
     }
 
-    @Override
-    public byte getType() {
-        return SerialType.JAVA_SERIAL.code();
-    }
 }

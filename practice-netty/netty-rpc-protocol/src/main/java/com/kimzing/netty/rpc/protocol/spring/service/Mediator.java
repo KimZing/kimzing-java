@@ -1,6 +1,6 @@
 package com.kimzing.netty.rpc.protocol.spring.service;
 
-import com.kimzing.netty.rpc.protocol.core.RpcRequest;
+import com.kimzing.netty.rpc.protocol.core.RequestBody;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -28,9 +28,9 @@ public class Mediator {
         return instance;
     }
 
-    public Object processor(RpcRequest rpcRequest) {
+    public Object processor(RequestBody requestBody) {
         // 以类的全名称和方法名作为key
-        String key = rpcRequest.getClassName() + "." + rpcRequest.getMethodName();
+        String key = requestBody.getClassName() + "." + requestBody.getMethodName();
 
         BeanMethod beanMethod = beanMethodMap.get(key);
         if(beanMethod == null){
@@ -40,7 +40,7 @@ public class Mediator {
         Object bean = beanMethod.getBean();
         Method method = beanMethod.getMethod();
         try {
-            return method.invoke(bean,rpcRequest.getParams());
+            return method.invoke(bean, requestBody.getParams());
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {

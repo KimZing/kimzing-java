@@ -1,7 +1,6 @@
-package com.kimzing.netty.rpc.protocol.serial;
+package com.kimzing.netty.rpc.protocol.netty.serial;
 
 import com.alibaba.fastjson.JSON;
-import com.kimzing.netty.rpc.protocol.core.SerialType;
 
 public class JsonSerializer  implements ISerializer{
     @Override
@@ -14,8 +13,4 @@ public class JsonSerializer  implements ISerializer{
         return JSON.parseObject(new String(data),clazz);
     }
 
-    @Override
-    public byte getType() {
-        return SerialType.JSON_SERIAL.code();
-    }
 }

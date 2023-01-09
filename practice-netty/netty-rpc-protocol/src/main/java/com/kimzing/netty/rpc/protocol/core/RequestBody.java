@@ -6,7 +6,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class RpcRequest implements Serializable {
+public class RequestBody implements Serializable {
 
     private String className;// 类名
     private String methodName;// 方法名称

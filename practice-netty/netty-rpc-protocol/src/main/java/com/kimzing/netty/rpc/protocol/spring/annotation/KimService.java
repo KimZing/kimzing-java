@@ -1,4 +1,4 @@
-package com.kimzing.netty.rpc.protocol.annotation;
+package com.kimzing.netty.rpc.protocol.spring.annotation;
 
 
 import org.springframework.stereotype.Component;

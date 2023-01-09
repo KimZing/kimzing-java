@@ -2,7 +2,7 @@ package com.kimzing.netty.rpc.provider.service;
 
 import com.kimzing.netty.rpc.api.user.User;
 import com.kimzing.netty.rpc.api.user.UserService;
-import com.kimzing.netty.rpc.protocol.annotation.KimService;
+import com.kimzing.netty.rpc.protocol.spring.annotation.KimService;
 
 @KimService
 public class UserServiceImpl implements UserService {

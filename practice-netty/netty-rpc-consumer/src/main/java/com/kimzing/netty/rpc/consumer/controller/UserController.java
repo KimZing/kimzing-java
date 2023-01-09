@@ -2,7 +2,7 @@ package com.kimzing.netty.rpc.consumer.controller;
 
 import com.kimzing.netty.rpc.api.user.User;
 import com.kimzing.netty.rpc.api.user.UserService;
-import com.kimzing.netty.rpc.protocol.annotation.KimReference;
+import com.kimzing.netty.rpc.protocol.spring.annotation.KimReference;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -11,7 +11,6 @@ public class UserController {
 
     @KimReference
     private UserService userService;
-
 
     @PostMapping
     public String save(@RequestBody User user){

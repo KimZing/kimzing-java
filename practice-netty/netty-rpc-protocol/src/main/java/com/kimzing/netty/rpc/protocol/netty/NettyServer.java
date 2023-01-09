@@ -1,7 +1,7 @@
 package com.kimzing.netty.rpc.protocol.netty;
 
-import com.kimzing.netty.rpc.protocol.code.RpcDecode;
-import com.kimzing.netty.rpc.protocol.code.RpcEncode;
+import com.kimzing.netty.rpc.protocol.netty.code.RpcDecode;
+import com.kimzing.netty.rpc.protocol.netty.code.RpcEncode;
 import com.kimzing.netty.rpc.protocol.netty.handler.Serverhandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -38,7 +38,7 @@ public class NettyServer {
                     protected void initChannel(SocketChannel ch) throws Exception {
                         ch.pipeline().
                                 addLast(new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE,
-                                        12,
+                                        10,
                                         4,
                                         0,
                                         0))

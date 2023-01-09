@@ -1,6 +1,6 @@
 package com.kimzing.netty.rpc.protocol.spring.service;
 
-import com.kimzing.netty.rpc.protocol.annotation.KimService;
+import com.kimzing.netty.rpc.protocol.spring.annotation.KimService;
 import com.kimzing.netty.rpc.protocol.netty.NettyServer;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;

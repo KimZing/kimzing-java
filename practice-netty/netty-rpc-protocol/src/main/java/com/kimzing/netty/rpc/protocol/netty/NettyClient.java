@@ -1,9 +1,9 @@
 package com.kimzing.netty.rpc.protocol.netty;
 
-import com.kimzing.netty.rpc.protocol.code.RpcDecode;
-import com.kimzing.netty.rpc.protocol.code.RpcEncode;
-import com.kimzing.netty.rpc.protocol.core.RpcProtocal;
-import com.kimzing.netty.rpc.protocol.core.RpcRequest;
+import com.kimzing.netty.rpc.protocol.netty.code.RpcDecode;
+import com.kimzing.netty.rpc.protocol.netty.code.RpcEncode;
+import com.kimzing.netty.rpc.protocol.core.Protocol;
+import com.kimzing.netty.rpc.protocol.core.RequestBody;
 import com.kimzing.netty.rpc.protocol.netty.handler.ClientHandler;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -43,7 +43,7 @@ public class NettyClient {
     }
 
 
-    public void sendRequest(RpcProtocal<RpcRequest> protocol) throws Exception {
+    public void sendRequest(Protocol<RequestBody> protocol) throws Exception {
         final ChannelFuture future=bootstrap.connect(this.serviceAddress,this.servicePort).sync();
         // 注册一个监听器，如果出问题就关闭group
         future.addListener(listener->{

@@ -1,6 +1,6 @@
 package com.kimzing.netty.rpc.protocol.spring.reference;
 
-import com.kimzing.netty.rpc.protocol.annotation.KimReference;
+import com.kimzing.netty.rpc.protocol.spring.annotation.KimReference;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.config.BeanDefinition;

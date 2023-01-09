@@ -5,9 +5,8 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class RpcProtocal<T> implements Serializable {
+public class ResponseBody implements Serializable {
 
-    private Header header;
-
-    private T content;
+    private Object data;
+    private String msg;
 }
