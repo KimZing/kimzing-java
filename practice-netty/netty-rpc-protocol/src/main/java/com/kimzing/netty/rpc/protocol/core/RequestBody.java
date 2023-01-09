@@ -13,10 +13,4 @@ public class RequestBody implements Serializable {
     private Object[] params;// 请求参数
     private Class<?>[] parameterTypes;//参数类型
 
-    public void setParams(Object[] params) {
-        this.params = new Object[params.length];
-        for (int i = 0; i < params.length; i++) {
-            this.params[i] = JSON.parseObject(JSON.toJSONString(params[i]), parameterTypes[i]);
-        }
-    }
 }

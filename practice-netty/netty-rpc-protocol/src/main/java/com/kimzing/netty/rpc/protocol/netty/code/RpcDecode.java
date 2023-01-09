@@ -1,5 +1,6 @@
 package com.kimzing.netty.rpc.protocol.netty.code;
 
+import com.alibaba.fastjson.JSON;
 import com.kimzing.netty.rpc.protocol.core.*;
 import com.kimzing.netty.rpc.protocol.netty.serial.ISerializer;
 import io.netty.buffer.ByteBuf;
@@ -41,6 +42,8 @@ public class RpcDecode extends ByteToMessageDecoder {
             case (byte)1:
                 // 反序列化
                 RequestBody requestBody = serializer.deserialize(content, RequestBody.class);
+                // 根据参数类型反序列化对应参数
+                deserializeParamByType(requestBody);
                 // 封装成RpcProtocal对象
                 Protocol<RequestBody> protocol = new Protocol<>();
                 protocol.setHeader(header);
@@ -59,5 +62,17 @@ public class RpcDecode extends ByteToMessageDecoder {
             default:
                 break;
         }
+    }
+
+    /**
+     * JSON 反序列化时，无法正确反序列化Params，需要根据ParamsType进行补充类型，否则在反射调用方法时会报类型错误
+     * @param requestBody
+     */
+    private void deserializeParamByType(RequestBody requestBody) {
+            Object[] params = new Object[requestBody.getParams().length];
+            for (int i = 0; i < params.length; i++) {
+                params[i] = JSON.parseObject(JSON.toJSONString(requestBody.getParams()[i]), requestBody.getParameterTypes()[i]);
+            }
+            requestBody.setParams(params);
     }
 }
