@@ -3,8 +3,6 @@ package com.kimzing.netty.protobuf.test;
 import com.alibaba.fastjson.JSON;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.kimzing.netty.protobuf.entity.Header;
-import com.kimzing.netty.protobuf.entity.Message;
 import com.kimzing.netty.protobuf.entity.MessageProto;
 
 /**
